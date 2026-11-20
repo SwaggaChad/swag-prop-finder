@@ -65,6 +65,6 @@ if st.button("Load Live NBA Props"):
         else:
             st.warning("No props returned for this request.")
         
-        except requests.RequestException as e:
+    except requests.RequestException as e:
         st.error(f"API request failed: {e}")
 
