@@ -58,7 +58,7 @@ if st.button("Load Live NBA Props"):
         pages_loaded += 1
         cursor = payload.get("meta", {}).get("next_cursor")
         if not cursor:
-           break
+            break
         
         
         st.success(f"Loaded {len(all_props)} props from {pages_loaded} pages!")
