@@ -37,28 +37,28 @@ if st.button("Load Live NBA Props"):
         cursor = None
         pages_loaded = 0
         for page in range (5):
-            response = requests.get(
+        params = {
+            "view": "compact",
+            "limit": 100
+        }
+
+        if cursor:
+           params["cursor"] = cursor
+        response = requests.get(
                 API_URL,
                 headers={"Authorization": f"Bearer {API_KEY}"},
-                params={
-                
-                "view": "compact",
-                "limit": 100,
-                
-                },
-                if cursor:
-                params["cursor"] = cursor
-            timeout=20
+                params=params,
+                timeout=20
         )
-            response.raise_for_status()
+        response.raise_for_status()
         
 
-            payload = response.json()
-            all_props.extend(payload.get("data", []))
-            pages_loaded += 1
-            cursor = payload.get("meta", {}).get("next_cursor")
-            if not cursor:
-                break
+        payload = response.json()
+        all_props.extend(payload.get("data", []))
+        pages_loaded += 1
+        cursor = payload.get("meta", {}).get("next_cursor")
+        if not cursor:
+           break
         
         
         st.success(f"Loaded {len(all_props)} props from {pages_loaded} pages!")
