@@ -51,8 +51,8 @@ if st.button("Load Live NBA Props"):
 
         if props:
             rows = []
-             for prop in props:
-                 rows.append({
+            for prop in props:
+                rows.append({
                      "Player": prop.get("player", "Unknown"),
                      "Team": prop.get("team", ""),
                      "Opponent": prop.get("opponent", ""),
