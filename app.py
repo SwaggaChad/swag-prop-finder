@@ -37,10 +37,10 @@ if st.button("Load Live NBA Props"):
             API_URL,
             headers={"Authorization": f"Bearer {API_KEY}"},
             params={
-                "league": "NBA",
+                
                 "view": "compact",
                 "limit": 100,
-                "cursor": "pp_17216030"
+                
             },
             timeout=20
         )
