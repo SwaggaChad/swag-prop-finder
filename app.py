@@ -44,8 +44,27 @@ if st.button("Load Live NBA Props"):
             timeout=20
         )
         response.raise_for_status()
-        st.success("API request successful!")
-        st.json(response.json())
-    except requests.RequestException as e:
+        st.success("Live props loaded!")
+
+        payload = response.json()
+        props = payload.get("data", [])
+
+        if props:
+            rows = []
+             for prop in props:
+                 rows.append({
+                     "Player": prop.get("player", "Unknown"),
+                     "Team": prop.get("team", ""),
+                     "Opponent": prop.get("opponent", ""),
+                     "Stat": prop.get("stat", ""),
+                     "Line": prop.get("line", ""),
+                     "Period": prop.get("period", ""),
+                     "Sides": " / ".join(prop.get("sides", []))
+                    })
+            st.dataframe(rows, use_container_width=True, hide_index=True)
+        else:
+            st.warning("No props returned for this request.")
+        
+        except requests.RequestException as e:
         st.error(f"API request failed: {e}")
 
