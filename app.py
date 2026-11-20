@@ -40,7 +40,7 @@ if st.button("Load Live NBA Props"):
                 "league": "NBA",
                 "view": "compact",
                 "limit": 100,
-                "cursor": "pp_17215754"
+                "cursor": "pp_17216030"
             },
             timeout=20
         )
