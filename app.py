@@ -27,3 +27,25 @@ st.subheader("Line Movement Alerts")
 st.info("Alerts will appear after we set up monitoring.")
 
 st.caption("Research only. No guaranteed picks.")
+
+
+st.subheader("🏀 Live PrizePicks Props")
+
+if st.button("Load Live NBA Props"):
+    try:
+        response = requests.get(
+            API_URL,
+            headers={"Authorization": f"Bearer {API_KEY}"},
+            params={
+                "league": "NBA",
+                "view": "compact",
+                "limit": 5
+            },
+            timeout=20
+        )
+        response.raise_for_status()
+        st.success("API request successful!")
+        st.json(response.json())
+    except requests.RequestException as e:
+        st.error(f"API request failed: {e}")
+
