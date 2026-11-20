@@ -37,7 +37,7 @@ if st.button("Load Live NBA Props"):
         cursor = None
         pages_loaded = 0
         for page in range (5):
-        params = {
+            params = {
             "view": "compact",
             "limit": 100
         }
