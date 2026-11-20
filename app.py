@@ -47,6 +47,9 @@ if st.button("Load Live NBA Props"):
         st.success("Live props loaded!")
 
         payload = response.json()
+        st.write("API pagination info:", payload.get("meta", {}))
+        st.write("API links:", payload.get("links", {}))
+        
         props = payload.get("data", [])
 
         if props:
