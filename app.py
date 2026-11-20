@@ -27,6 +27,7 @@ if st.button("Load All Sports Props"):
         with st.spinner("Loading available props..."):
             for page in range(5):
                 params = {
+                    "league":"Tennis",
                     "view": "compact",
                     "limit": 100
                 }
