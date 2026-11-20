@@ -33,25 +33,36 @@ st.subheader("🏀 Live PrizePicks Props")
 
 if st.button("Load Live NBA Props"):
     try:
-        response = requests.get(
-            API_URL,
-            headers={"Authorization": f"Bearer {API_KEY}"},
-            params={
+        all_props = []
+        cursor = None
+        pages_loaded = 0
+        for page in range (5):
+            response = requests.get(
+                API_URL,
+                headers={"Authorization": f"Bearer {API_KEY}"},
+                params={
                 
                 "view": "compact",
                 "limit": 100,
                 
-            },
+                },
+                if cursor:
+                params["cursor"] = cursor
             timeout=20
         )
-        response.raise_for_status()
-        st.success("Live props loaded!")
-
-        payload = response.json()
-        st.write("API pagination info:", payload.get("meta", {}))
-        st.write("API links:", payload.get("links", {}))
+            response.raise_for_status()
         
-        props = payload.get("data", [])
+
+            payload = response.json()
+            all_props.extend(payload.get("data", []))
+            pages_loaded += 1
+            cursor = payload.get("meta", {}).get("next_cursor")
+            if not cursor:
+                break
+        
+        
+        st.success(f"Loaded {len(all_props)} props from {pages_loaded} pages!")
+        props = all_props
 
         if props:
             rows = []
