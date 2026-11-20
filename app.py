@@ -1,6 +1,7 @@
 import requests
 import streamlit as st
-
+API_KEY = st.secrets["PRIZEPICKS_API_KEY"]
+API_URL = "https://prizepicksapi.com/api/v1/projections"
 st.set_page_config(
     page_title="SWAG PROP FINDER",
     page_icon="🏆",
