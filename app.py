@@ -39,7 +39,7 @@ if st.button("Load Live NBA Props"):
             params={
                 "league": "NBA",
                 "view": "compact",
-                "limit": 5
+                "limit": 100
             },
             timeout=20
         )
